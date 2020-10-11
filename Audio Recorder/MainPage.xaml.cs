@@ -25,9 +25,9 @@ namespace Audio_Recorder
     {
         private void RecordClick(Object sender, RoutedEventArgs e)
         {
-            this._viewModel._audioFile.StartRecording();
+            this._viewModel.recordingPrompt = ""; // forces change, this is a hacky solution
         }
-        AudioFileViewModel _viewModel { get;  }
+        AudioFileViewModel _viewModel { get; set; }
         public MainPage()
         {
             this.InitializeComponent();

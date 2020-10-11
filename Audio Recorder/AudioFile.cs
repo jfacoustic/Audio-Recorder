@@ -10,6 +10,8 @@ using Windows.Foundation.Diagnostics;
 using Windows.Media.Capture;
 using Windows.Media.MediaProperties;
 using Windows.Storage;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace Audio_Recorder
 {
@@ -37,29 +39,21 @@ namespace Audio_Recorder
         }
     }
 
-    class AudioFileViewModel : System.ComponentModel.INotifyPropertyChanged
+    public class AudioFileViewModel : INotifyPropertyChanged 
     {
-        public AudioFile _audioFile { get; }
-        public event PropertyChangedEventHandler PropertyChanged = delegate { };
+        public event PropertyChangedEventHandler PropertyChanged = delegate { }; 
+
+        private bool _recordingStatus;
+        public string recordingPrompt { get { return this._recordingStatus ? "record" : "stop"; } set { this._recordingStatus = !this._recordingStatus; this.OnPropertyChanged(); } }
+        public AudioFileViewModel()
+        {
+            this._recordingStatus = false;
+            this.recordingPrompt = "Record";
+        }
+
         public void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-        public string _recordingStatus { 
-            get { 
-                    if (this._audioFile.recordingStatus)
-                    {
-                        return "recording";
-                    } else
-                    {
-                        return "not recording";
-                    }
-            } 
-        }
-        
-        public AudioFileViewModel()
-        {
-            this._audioFile = new AudioFile(); 
         }
     }
 }
