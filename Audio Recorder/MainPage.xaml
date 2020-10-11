@@ -13,8 +13,10 @@
             <ColumnDefinition Width="100"/>
             <ColumnDefinition Width="40"/>
             <ColumnDefinition/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Slider Grid.Column="0" Grid.Row="0" x:Name="Volume"/>
-        <Button Grid.Column="2" Grid.Row="0" Content="Record" VerticalAlignment="Top"/>
+        <Button Grid.Column="2" Grid.Row="0" Content="Record" VerticalAlignment="Top" Click="RecordClick"/>
+        <TextBlock Grid.Column="3" Text="{x:Bind _viewModel._recordingStatus, Mode=OneWay}"/>
     </Grid>
 </Page>

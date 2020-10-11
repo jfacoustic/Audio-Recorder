@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -22,9 +23,15 @@ namespace Audio_Recorder
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private void RecordClick(Object sender, RoutedEventArgs e)
+        {
+            this._viewModel._audioFile.StartRecording();
+        }
+        AudioFileViewModel _viewModel { get;  }
         public MainPage()
         {
             this.InitializeComponent();
+            this._viewModel = new AudioFileViewModel();
         }
     }
 }
